@@ -1,0 +1,27 @@
+<?php
+
+/**
+* Plugin Name: Farmers Gallery
+* Plugin URI: http://www.dtaalbers.com/
+* Description: A simple easy-to-use gallery plugin. Easily add gallerys to your website
+* Version: 1.0
+* Author: Tom Aalbers (dtaalbers)
+* Author URI: http://www.dtaalbers.com 
+**/
+
+if ( !function_exists( 'add_action' ) ) {
+    echo 'I can do nothing when called directly.';
+    exit;
+}
+
+define( 'FARMERSGALLERY_VERSION', '1.0' );
+define( 'FARMERSGALLERY_MINIMUM_WP_VERSION', '3.2' );
+define( 'FARMERSGALLERY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'FARMERSGALLERY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+require_once( FARMERSGALLERY_PLUGIN_DIR . 'classes/class.farmer.php' );
+
+register_activation_hook( __FILE__, array( 'Farmer', 'plugin_activation' ) );
+register_deactivation_hook( __FILE__, array( 'Farmer', 'plugin_deactivation' ) );
+
+add_action( 'init', array( 'Farmer', 'init' ) );
