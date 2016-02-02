@@ -21,7 +21,4 @@ define( 'FARMERSGALLERY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 require_once( FARMERSGALLERY_PLUGIN_DIR . 'classes/class.farmer.php' );
 
-register_activation_hook( __FILE__, array( 'Farmer', 'plugin_activation' ) );
-register_deactivation_hook( __FILE__, array( 'Farmer', 'plugin_deactivation' ) );
-
 add_action( 'init', array( 'Farmer', 'init' ) );
