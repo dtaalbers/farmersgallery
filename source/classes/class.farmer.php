@@ -6,7 +6,7 @@ class Farmer {
 	private static $meta_box_title = "Add images to this album";
 
 	public static function init() {
-		if ( ! self::$initiated ) {
+		if (!self::$initiated) {
 			// Were initiating
 			self::$initiated = true;
 			// Add the wordpress hooks
@@ -22,13 +22,13 @@ class Farmer {
 
 	private static function init_hooks() {
 		// Add hook to plugin activation event
-		register_activation_hook( __FILE__, array( 'Farmer', 'plugin_activation' ) );
+		register_activation_hook(__FILE__, array('Farmer', 'plugin_activation'));
 		// Add hook to plugin deactivation event
-		register_deactivation_hook( __FILE__, array( 'Farmer', 'plugin_deactivation' ) );
+		register_deactivation_hook(__FILE__, array('Farmer', 'plugin_deactivation'));
 	}
 
 	private static function register_custom_post_type_album() {	  	  
-	    register_post_type( 'album', 
+	    register_post_type('album', 
 		    array(
 		        'labels' => array(
 			        'name' => _x( 'Farmer Albums', 'album' ),
@@ -68,12 +68,13 @@ class Farmer {
 	}
 
 	private static function register_custom_plugin_files() {
-		// Main css file
-		wp_register_style( 'main', FARMERSGALLERY_PLUGIN_URL . 'css/main.css' );
-		// Bootstrap grid css	
-		wp_register_style( 'grid', FARMERSGALLERY_PLUGIN_URL . 'css/grid.css' );
-		// Knockout script
-		wp_register_script( 'knockout', 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js' );		
+		// CSS files
+		wp_register_style('main', FARMERSGALLERY_PLUGIN_URL.'css/main.css');
+		wp_register_style('grid', FARMERSGALLERY_PLUGIN_URL.'css/grid.css');
+        wp_register_style('font-awsome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+        
+		// Scripts
+		wp_register_script('knockout', 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js');		
 	}
 
 	private static function add_album_filter() {
@@ -88,12 +89,11 @@ class Farmer {
 	}
 
 	private static function add_meta_box_albums() {
-		add_action( 'add_meta_boxes', function() {
-		    add_meta_box(
-		        'image_id',
-		        __( self::$meta_box_title, 'myplugin_textdomain' ),
+		add_action('add_meta_boxes', function() {
+		    add_meta_box('image_id',
+                __(self::$meta_box_title, 'myplugin_textdomain'),
 		        function() {
-		        	require_once( FARMERSGALLERY_PLUGIN_DIR . 'views/metabox.php' );
+		        	require_once(FARMERSGALLERY_PLUGIN_DIR.'views/metabox.php');
 		        }
 		    );
 		});

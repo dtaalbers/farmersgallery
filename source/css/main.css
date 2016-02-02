@@ -31,3 +31,20 @@
     height: 85px;
     display:block;
 }
+
+.close {
+    border-radius: 50%;
+    background-color: white;
+    border: lightgrey 1px solid;
+    color: red;
+    width: 21px;
+    padding-left: 4px;
+    height: 21px;
+    position: absolute;
+    right: 0;
+    top: -2px;
+}
+
+.close:hover {
+    cursor: pointer;
+}
