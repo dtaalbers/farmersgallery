@@ -2,7 +2,7 @@
 
 /**
 * Plugin Name: Farmers Gallery
-* Plugin URI: http://www.dtaalbers.com/
+* Plugin URI: https://github.com/dtaalbers/farmersgallery
 * Description: A simple easy-to-use gallery plugin. Easily add gallerys to your website
 * Version: 1.0
 * Author: Tom Aalbers (dtaalbers)
