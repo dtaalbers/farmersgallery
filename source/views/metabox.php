@@ -27,6 +27,8 @@ wp_enqueue_media();
 	</div>
 </div>
 
+<input type="button" data-bind="click: save" id="save-btn" class="button-secondary" value="Save">
+
 <script>
 	var Image = function (url) {
 	    this.url = ko.observable(url);

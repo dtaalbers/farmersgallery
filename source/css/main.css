@@ -32,6 +32,10 @@
     display:block;
 }
 
+#save-btn {
+    margin-top: 20px;
+}
+
 .close {
     border-radius: 50%;
     background-color: white;
