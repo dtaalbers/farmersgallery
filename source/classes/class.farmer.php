@@ -3,6 +3,7 @@
 class Farmer { 
 
 	private static $initiated = false;
+	private static $meta_box_title = "Add images to this album";
 
 	public static function init() {
 		if ( ! self::$initiated ) {
@@ -12,6 +13,8 @@ class Farmer {
 			self::init_hooks();
 			// Register custom post type
 			self::register_custom_post_type_album();
+			// Register custom files
+			self::register_custom_plugin_files();
 			// Add custom meta box to post type album
 			self::add_meta_box_albums();
 		}
@@ -64,6 +67,15 @@ class Farmer {
 		self::add_album_filter();
 	}
 
+	private static function register_custom_plugin_files() {
+		// Main css file
+		wp_register_style( 'main', FARMERSGALLERY_PLUGIN_URL . 'css/main.css' );
+		// Bootstrap grid css	
+		wp_register_style( 'grid', FARMERSGALLERY_PLUGIN_URL . 'css/grid.css' );
+		// Knockout script
+		wp_register_script( 'knockout', 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js' );		
+	}
+
 	private static function add_album_filter() {
 		add_filter('albums', function() {
   		    $new_columns['cb'] = '<input type="checkbox" />';	     
@@ -75,13 +87,13 @@ class Farmer {
 	 	}, 10, 8);
 	}
 
-	public static function add_meta_box_albums() {
+	private static function add_meta_box_albums() {
 		add_action( 'add_meta_boxes', function() {
 		    add_meta_box(
 		        'image_id',
-		        __( 'Upload your images', 'myplugin_textdomain' ),
+		        __( self::$meta_box_title, 'myplugin_textdomain' ),
 		        function() {
-		        	require_once( FARMERSGALLERY_PLUGIN_DIR . 'views/add_image.php' );
+		        	require_once( FARMERSGALLERY_PLUGIN_DIR . 'views/metabox.php' );
 		        }
 		    );
 		});
