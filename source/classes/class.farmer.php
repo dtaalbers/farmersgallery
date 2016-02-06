@@ -25,6 +25,8 @@ class Farmer {
 		register_activation_hook(__FILE__, array('Farmer', 'plugin_activation'));
 		// Add hook to plugin deactivation event
 		register_deactivation_hook(__FILE__, array('Farmer', 'plugin_deactivation'));
+        
+        add_action('save_post', array('Farmer', 'save_meta_data'));
 	}
 
 	private static function register_custom_post_type_album() {	  	  
@@ -71,8 +73,7 @@ class Farmer {
 		// CSS files
 		wp_register_style('main', FARMERSGALLERY_PLUGIN_URL.'css/main.css');
 		wp_register_style('grid', FARMERSGALLERY_PLUGIN_URL.'css/grid.css');
-        wp_register_style('font-awsome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
-        
+        wp_register_style('font-awsome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');        
 		// Scripts
 		wp_register_script('knockout', 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js');		
 	}
@@ -88,16 +89,38 @@ class Farmer {
 	 	}, 10, 8);
 	}
 
-	private static function add_meta_box_albums() {
+	public static function add_meta_box_albums() {
 		add_action('add_meta_boxes', function() {
 		    add_meta_box('image_id',
                 __(self::$meta_box_title, 'myplugin_textdomain'),
-		        function() {
-		        	require_once(FARMERSGALLERY_PLUGIN_DIR.'views/metabox.php');
-		        }
+		        array('Farmer', 'add_meta_box_albums_callback')
 		    );
 		});
 	}
+    
+    public static function add_meta_box_albums_callback($post) {	        
+        $data = get_post_meta( $post->ID, 'images', true );        
+        $images = explode(",", $data);        
+        wp_nonce_field('creating_images', 'album_nonce');        
+        require_once(FARMERSGALLERY_PLUGIN_DIR.'views/metabox.php');
+	}
+    
+    public static function save_meta_data($post_id) {     
+        // Checks save status
+        $is_autosave = wp_is_post_autosave( $post_id );
+        $is_revision = wp_is_post_revision( $post_id );
+        $is_valid_nonce = (isset( $_POST[ 'album_nonce' ]) && wp_verify_nonce( $_POST[ 'album_nonce' ], 'images')) ? 'true' : 'false';
+
+        // Exits script depending on save status
+        if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
+            return;
+        }
+
+        // Checks for input and sanitizes/saves if needed
+        if( isset( $_POST[ 'images' ] ) ) {
+            update_post_meta( $post_id, 'images', $_POST[ 'images' ] );
+        }
+    }
 
 	public static function plugin_activation () {
 		

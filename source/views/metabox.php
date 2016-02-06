@@ -17,6 +17,16 @@ wp_enqueue_media();
 
 <!-- Preview box where the image will be placed -->
 <div id="preview">
+    <div class="row">
+        <?php foreach ($images as $image) : ?>        
+            <div class="col-md-1 image-container">            
+                <div class="close" data-bind="click: $root.removeImage"><i class="fa fa-close"></i></div>
+                <div class="image">
+                    <img class="img-responsive" src="<?php echo $image; ?>">				
+                </div>      
+            </div>              
+        <?php endforeach; ?>        
+    </div>
 	<div class="row" data-bind="foreach: images">
 		<div class="col-md-1 image-container">
             <div class="close" data-bind="click: $root.removeImage"><i class="fa fa-close"></i></div>
@@ -27,7 +37,7 @@ wp_enqueue_media();
 	</div>
 </div>
 
-<input type="button" data-bind="click: save" id="save-btn" class="button-secondary" value="Save">
+<input type="hidden" name="images" id="images" value="<?php echo $data; ?>">
 
 <script>
 	var Image = function (url) {
@@ -47,13 +57,26 @@ wp_enqueue_media();
         			var jsonImage = image.toJSON();
 	            	self.images.push(new Image(jsonImage.url));	
 	        	});
+                self.updatePostForm();
 	        });
         }
         self.removeImage = function(image) {
             var sure = confirm("Are you sure you want to delete this image?");
             if(sure) {               
                 self.images.remove(image); 
+                self.updatePostForm();
             }
+        }
+        self.updatePostForm = function () {
+            var imageString = "";1
+            ko.utils.arrayForEach(self.images(), function(image) {
+                if(imageString.length == 0) {
+                    imageString += image.url();
+                } else {
+                    imageString += ',' + image.url();              
+                }
+            });
+            $('#images').val(imageString);
         }
     };
 
