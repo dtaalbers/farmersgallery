@@ -119,12 +119,10 @@ class Farmer {
         $is_autosave = wp_is_post_autosave( $post_id );
         $is_revision = wp_is_post_revision( $post_id );
         $is_valid_nonce = (isset( $_POST[ 'album_nonce' ]) && wp_verify_nonce( $_POST[ 'album_nonce' ], 'images')) ? 'true' : 'false';
-
         // Exits script depending on save status
         if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
             return;
         }
-
         // Checks for input and sanitizes/saves if needed
         if( isset( $_POST[ 'images' ] ) ) {
             update_post_meta( $post_id, 'images', $_POST[ 'images' ] );

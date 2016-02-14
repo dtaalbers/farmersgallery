@@ -78,8 +78,7 @@ wp_enqueue_media();
                 }
             });
             $('#images').val(imageString);
-        }
-        
+        }        
         self.init();
     };
 
