@@ -16,17 +16,7 @@ wp_enqueue_media();
 </div>
 
 <!-- Preview box where the image will be placed -->
-<div id="preview">
-    <div class="row">
-        <?php foreach ($images as $image) : ?>        
-            <div class="col-md-1 image-container">            
-                <div class="close" data-bind="click: $root.removeImage"><i class="fa fa-close"></i></div>
-                <div class="image">
-                    <img class="img-responsive" src="<?php echo $image; ?>">				
-                </div>      
-            </div>              
-        <?php endforeach; ?>        
-    </div>
+<div data-bind="visible: doneLoading" id="preview">
 	<div class="row" data-bind="foreach: images">
 		<div class="col-md-1 image-container">
             <div class="close" data-bind="click: $root.removeImage"><i class="fa fa-close"></i></div>
@@ -46,7 +36,18 @@ wp_enqueue_media();
 
     var ViewModel = function ($) {
         var self = this;
+        self.doneLoading = ko.observable(false);
         self.images = ko.observableArray([]);
+        self.init = function() {
+            var value = $('#images').val();            
+            if(value) {
+                var imageUrls = value.split(',');                
+                imageUrls.forEach(function(imageUrl) {
+                    self.images.push(new Image(imageUrl));
+                });
+            }
+            self.doneLoading(true);           
+        }
         self.addImages = function() {
 	        var imageContainer = wp.media({ 
 	            title: 'Upload Image',
@@ -78,6 +79,8 @@ wp_enqueue_media();
             });
             $('#images').val(imageString);
         }
+        
+        self.init();
     };
 
     jQuery(document).ready(function($) {
