@@ -25,8 +25,12 @@ class Farmer {
 		register_activation_hook(__FILE__, array('Farmer', 'plugin_activation'));
 		// Add hook to plugin deactivation event
 		register_deactivation_hook(__FILE__, array('Farmer', 'plugin_deactivation'));
-        
         add_action('save_post', array('Farmer', 'save_meta_data'));
+        add_action('edit_form_after_title', function() {
+            global $post, $wp_meta_boxes;
+            do_meta_boxes(get_current_screen(), 'advanced', $post);
+            unset($wp_meta_boxes[get_post_type($post)]['advanced']);
+        });
 	}
 
 	private static function register_custom_post_type_album() {	  	  
@@ -92,15 +96,20 @@ class Farmer {
 	public static function add_meta_box_albums() {
 		add_action('add_meta_boxes', function() {
 		    add_meta_box('image_id',
-                __(self::$meta_box_title, 'myplugin_textdomain'),
-		        array('Farmer', 'add_meta_box_albums_callback')
+                __(self::$meta_box_title),
+		        array('Farmer', 'add_meta_box_albums_callback'),
+                'album',
+                'advanced',
+                'high'
 		    );
 		});
 	}
     
     public static function add_meta_box_albums_callback($post) {	        
-        $data = get_post_meta( $post->ID, 'images', true );        
-        $images = explode(",", $data);        
+        $data = get_post_meta( $post->ID, 'images', true );    
+        if($data != "") {            
+            $images = explode(",", $data);  
+        }    
         wp_nonce_field('creating_images', 'album_nonce');        
         require_once(FARMERSGALLERY_PLUGIN_DIR.'views/metabox.php');
 	}
@@ -123,7 +132,7 @@ class Farmer {
     }
 
 	public static function plugin_activation () {
-		
+        
 	}
 
 	public static function plugin_deactivation () {
