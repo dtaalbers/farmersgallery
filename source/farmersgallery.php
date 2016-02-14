@@ -19,6 +19,7 @@ define('FARMERSGALLERY_MINIMUM_WP_VERSION', '3.2');
 define('FARMERSGALLERY_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 define('FARMERSGALLERY_PLUGIN_DIR', plugin_dir_path( __FILE__ ));
 
+require_once(FARMERSGALLERY_PLUGIN_DIR.'classes/class.pagetemplater.php');
 require_once(FARMERSGALLERY_PLUGIN_DIR.'classes/class.farmer.php');
-
+add_action( 'plugins_loaded', array( 'PageTemplater', 'get_instance' ));
 add_action('init', array('Farmer', 'init'));
