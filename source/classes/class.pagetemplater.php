@@ -26,7 +26,10 @@ class PageTemplater {
         // template assigned and return it's path
         add_filter('template_include', array($this, 'view_project_template'));
         // Add your templates to this array.
-        $this->templates = array('albums.php' => 'Albums');
+        $this->templates = array(
+            'albums.php' => 'Albums',
+            'detail.php' => 'Detail',
+            );
     } 
 
     /* Adds our template to the pages cache in order to trick WordPress

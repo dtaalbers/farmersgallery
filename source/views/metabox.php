@@ -26,14 +26,13 @@ wp_enqueue_media();
 		</div>
 	</div>
 </div>
-
+<!-- Holding the post data -->
 <input type="hidden" name="images" id="images" value="<?php echo $data; ?>">
 
 <script>
 	var Image = function (url) {
 	    this.url = ko.observable(url);
 	}
-
     var ViewModel = function ($) {
         var self = this;
         self.doneLoading = ko.observable(false);
@@ -69,7 +68,7 @@ wp_enqueue_media();
             }
         }
         self.updatePostForm = function () {
-            var imageString = "";1
+            var imageString = "";
             ko.utils.arrayForEach(self.images(), function(image) {
                 if(imageString.length == 0) {
                     imageString += image.url();
@@ -81,7 +80,6 @@ wp_enqueue_media();
         }        
         self.init();
     };
-
     jQuery(document).ready(function($) {
         var vm = new ViewModel($);
         ko.applyBindings(vm);

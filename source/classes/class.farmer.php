@@ -75,11 +75,14 @@ class Farmer {
 
 	private static function register_custom_plugin_files() {
 		// CSS files
-		wp_register_style('main', FARMERSGALLERY_PLUGIN_URL.'css/main.css');
+		wp_register_style('main', FARMERSGALLERY_PLUGIN_URL.'css/style.css');
 		wp_register_style('grid', FARMERSGALLERY_PLUGIN_URL.'css/grid.css');
         wp_register_style('font-awsome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');        
 		// Scripts
-		wp_register_script('knockout', 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js');		
+		wp_register_script('knockout', 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js');
+        wp_register_script('jquery-easing', FARMERSGALLERY_PLUGIN_URL.'js/jquery.easing.1.3.js');	
+        wp_register_script('jquery-mousewheel', FARMERSGALLERY_PLUGIN_URL.'js/jquery.mousewheel.min.js');
+        wp_register_script('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js');        	
 	}
 
 	private static function add_album_filter() {
@@ -124,8 +127,8 @@ class Farmer {
             return;
         }
         // Checks for input and sanitizes/saves if needed
-        if( isset( $_POST[ 'images' ] ) ) {
-            update_post_meta( $post_id, 'images', $_POST[ 'images' ] );
+        if(isset( $_POST[ 'images' ])) {
+            update_post_meta($post_id, 'images', $_POST[ 'images' ]);
         }
     }
 
