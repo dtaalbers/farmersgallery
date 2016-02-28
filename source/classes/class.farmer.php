@@ -81,7 +81,8 @@ class Farmer {
 		// Scripts
 		wp_register_script('knockout', 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js');
         wp_register_script('jquery-easing', FARMERSGALLERY_PLUGIN_URL.'js/jquery.easing.1.3.js');	
-        wp_register_script('jquery-mousewheel', FARMERSGALLERY_PLUGIN_URL.'js/jquery.mousewheel.min.js');
+        wp_register_script('jquery-mousewheel', FARMERSGALLERY_PLUGIN_URL.'js/jquery.mousewheel.min.js');        
+        wp_register_script('custom', FARMERSGALLERY_PLUGIN_URL.'js/custom.min.js');
         wp_register_script('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js');        	
 	}
 
