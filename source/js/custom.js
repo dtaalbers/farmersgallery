@@ -239,11 +239,11 @@
             $toolbar.data("imageViewMode", theMode); 
             FullScreenBackground($bgimg);
             if(theMode=="full"){
-                $toolbar.html("<span class='lightgrey'>IMAGE VIEW MODE &rsaquo;</span> FULL");
+                $toolbar.html("<span class='lightgrey'>"+ farmer.ViewMode +" &rsaquo;</span> "+ farmer.full);
             } else if(theMode=="fit") {
-                $toolbar.html("<span class='lightgrey'>IMAGE VIEW MODE &rsaquo;</span> FIT");
+                $toolbar.html("<span class='lightgrey'>"+ farmer.ViewMode +" &rsaquo;</span> "+ farmer.fit);
             } else {
-                $toolbar.html("<span class='lightgrey'>IMAGE VIEW MODE &rsaquo;</span> ORIGINAL");
+                $toolbar.html("<span class='lightgrey'>"+ farmer.ViewMode +" &rsaquo;</span> "+ farmer.original);
             }
         }
         var images=["ajax-loader_dark.gif","round_custom_scrollbar_bg_over.png"];

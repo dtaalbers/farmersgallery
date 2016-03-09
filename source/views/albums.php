@@ -12,6 +12,13 @@
     wp_enqueue_script('jquery-ui');
     wp_enqueue_script('custom');
     
+    wp_localize_script('custom','farmer', array(
+    	'full' => __( "Full", 'farmersgallery' ),
+        'original' => __( "Original", 'farmersgallery' ),
+        'fit' => __( "Fit", 'farmersgallery' ),
+        'ViewMode' => __( "IMAGE VIEW MODE", 'farmersgallery' ),
+    ));
+    
     $args = array(
         'posts_per_page'   => 30,
         'orderby'          => 'post_date',
@@ -22,8 +29,8 @@
     );  
     
     $myposts = get_posts($args);
-?>
-<?php get_header(); ?>
+
+    get_header(); ?>
 <div class="container"> 
     <div class="row">          
         <div id="albums">
@@ -33,7 +40,7 @@
                         <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'single-post-thumbnail'); ?>	                                         
                         <h3><?php the_title()?></h3>                
                         <img class="img-responsive" src="<?php echo (empty($image) ?  'http://placehold.it/1000x1000' : $image[0])?>">                        
-                        <button data-id="<?php echo $post->ID ?>" data-bind="click: openAlbum" class="btn">Open album</button>
+                        <button data-id="<?php echo $post->ID ?>" data-bind="click: openAlbum" class="btn"><?php echo __('Open Album', 'farmersgallery')?></button>
                     </div>           
                 </div> 
             <?php endforeach; ?>  
@@ -184,7 +191,7 @@
         <img id="bgimg"/>
         <div id="preloader"><img src="<?php echo FARMERSGALLERY_PLUGIN_URL; ?>images/ajax-loader_dark.gif" width="32" height="32" align="absmiddle" />LOADING...</div>
         <div id="arrow_indicator"><img src="<?php echo FARMERSGALLERY_PLUGIN_URL; ?>images/sw_arrow_indicator.png" width="50" height="50"  /></div>
-        <div id="nextimage_tip">Click for next image</div>
+        <div id="nextimage_tip"><?php echo __('Click for the next image', 'farmersgallery')?></div>
     </div>
 </div>
 

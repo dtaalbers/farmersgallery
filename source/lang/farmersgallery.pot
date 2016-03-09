@@ -1,0 +1,27 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Farmers Gallery 1.0\n"
+"POT-Creation-Date: 2016-03-09 20:02+0100\n"
+"PO-Revision-Date: 2016-02-28 15:11+0100\n"
+"Last-Translator: \n"
+"Language-Team: Tom Aalbers <dtaalbers@gmail.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Images"
+#~ msgstr "Images"
+
+#~ msgid "Author"
+#~ msgstr "Author"

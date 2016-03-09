@@ -12,7 +12,7 @@ wp_enqueue_media();
 
 <!-- Container holding the upload button -->
 <div id="container">
-    <input type="button" data-bind="click: addImages" id="upload-btn" class="button-secondary" value="Select Images">
+    <input type="button" data-bind="click: addImages" id="upload-btn" class="button-secondary" value="<?php echo __('Select Images', 'farmersgallery')?>">
 </div>
 
 <!-- Preview box where the image will be placed -->
@@ -61,7 +61,7 @@ wp_enqueue_media();
 	        });
         }
         self.removeImage = function(image) {
-            var sure = confirm("Are you sure you want to delete this image?");
+            var sure = confirm("<?php echo __('Are you sure you want to delete this image?', 'farmersgallery')?>");
             if(sure) {               
                 self.images.remove(image); 
                 self.updatePostForm();

@@ -3,7 +3,7 @@
 class Farmer { 
 
 	private static $initiated = false;
-	private static $meta_box_title = "Add images to this album";
+    private static $plugin_slug = "farmersgallery";
 
 	public static function init() {
 		if (!self::$initiated) {
@@ -31,24 +31,25 @@ class Farmer {
             do_meta_boxes(get_current_screen(), 'advanced', $post);
             unset($wp_meta_boxes[get_post_type($post)]['advanced']);
         });
+        add_action( 'init', array($this, 'load_plugin_textdomain') );
 	}
 
 	private static function register_custom_post_type_album() {	  	  
 	    register_post_type('album', 
 		    array(
 		        'labels' => array(
-			        'name' => _x( 'Farmer Albums', 'album' ),
-			        'singular_name' => _x( 'Farmer Album', 'album' ),
-			        'add_new' => _x( 'Add New', 'album' ),
-			        'add_new_item' => _x( 'Add New Farmer Album', 'album' ),
-			        'edit_item' => _x( 'Edit Farmer Album', 'album' ),
-			        'new_item' => _x( 'New Farmer Album', 'album' ),
-			        'view_item' => _x( 'View Farmer Album', 'album' ),
-			        'search_items' => _x( 'Search Farmer Albums', 'album' ),
-			        'not_found' => _x( 'No Farmer Albums found', 'album' ),
-			        'not_found_in_trash' => _x( 'No Farmer Albums found in Trash', 'album' ),
-			        'parent_item_colon' => _x( 'Parent Album:', 'album' ),
-			        'menu_name' => _x( 'Farmer Albums', 'album' ),
+			        'name' => __('Farmer Albums', self::$plugin_slug),
+			        'singular_name' => __('Farmer Album', self::$plugin_slug),
+			        'add_new' => __('Add New', self::$plugin_slug ),
+			        'add_new_item' => __('Add New Farmer Album', self::$plugin_slug),
+			        'edit_item' => __('Edit Farmer Album', self::$plugin_slug),
+			        'new_item' => __('New Farmer Album', self::$plugin_slug),
+			        'view_item' => __('View Farmer Album', self::$plugin_slug),
+			        'search_items' => __('Search Farmer Albums', self::$plugin_slug),
+			        'not_found' => __('No Farmer Albums found', self::$plugin_slug),
+			        'not_found_in_trash' => __('No Farmer Albums found in trash', self::$plugin_slug),
+			        'parent_item_colon' => __('Parent Album:', self::$plugin_slug),
+			        'menu_name' => __('Farmer Albums', self::$plugin_slug),
 			    ),
 		        'hierarchical' => true,
 		        'description' => 'Farmer Albums',
@@ -83,16 +84,17 @@ class Farmer {
         wp_register_script('jquery-easing', FARMERSGALLERY_PLUGIN_URL.'js/jquery.easing.1.3.js');	
         wp_register_script('jquery-mousewheel', FARMERSGALLERY_PLUGIN_URL.'js/jquery.mousewheel.min.js');        
         wp_register_script('custom', FARMERSGALLERY_PLUGIN_URL.'js/custom.min.js');
-        wp_register_script('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js');        	
+        wp_register_script('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js');   
 	}
+    
+
 
 	private static function add_album_filter() {
-		add_filter('albums', function() {
-  		    $new_columns['cb'] = '<input type="checkbox" />';	     
-		    $new_columns['id'] = __('ID');
-		    $new_columns['title'] = _x('Farmer Album', 'column name');
-		    $new_columns['images'] = __('Images');
-		    $new_columns['author'] = __('Author');     
+		add_filter('manage_edit-album_columns', function() {
+  		    $new_columns['cb'] = '<input type="checkbox" />';	 
+		    $new_columns['title'] = __('Title', self::$plugin_slug);
+		    $new_columns['author'] = __('Author', self::$plugin_slug);
+            $new_columns['date'] = __('Date', self::$plugin_slug);      
 	 	    return $new_columns;
 	 	}, 10, 8);
 	}
@@ -100,7 +102,7 @@ class Farmer {
 	public static function add_meta_box_albums() {
 		add_action('add_meta_boxes', function() {
 		    add_meta_box('image_id',
-                __(self::$meta_box_title),
+                __("Add images to this album", self::$plugin_slug),
 		        array('Farmer', 'add_meta_box_albums_callback'),
                 'album',
                 'advanced',
