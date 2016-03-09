@@ -103,7 +103,7 @@
 }
 
 html,body{height:100%}
-#fullscreen {margin:0; padding:0; background:#333 url('../images/sw_page_bg.png'); overflow:hidden; font-family:Helvetica, Arial, sans-serif; font-size:16px;}
+#fullscreen {margin:0; padding:0; background:#333 url('../images/sw_page_bg.png'); overflow:hidden; font-family:Helvetica, Arial, sans-serif; font-size:16px; z-index: 9999;}
 /* custom fonts */
 @font-face {
 	font-family: 'eurof55-webfont';
