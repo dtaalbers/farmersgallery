@@ -64,7 +64,8 @@
         self.openAlbum = function(data, event) {           
             var id = $(event.currentTarget).data('id');
             var title = $(event.currentTarget).data('title');  
-            self.fetchTitleAndDescription(id, function(data) {             
+            self.fetchTitleAndDescription(id, function(data) {
+
                 $("#outer_container .title").html(data.title);
                 $("#outer_container .description").html(data.description);                 
                 self.fetchImages(id, function(){   
@@ -80,7 +81,7 @@
             $.ajax({
                 type: "POST",
                 datatype : "json",
-                url: "<?php echo FARMERSGALLERY_PLUGIN_URL; ?>classes/post.images.php",
+                url: "<?php echo FARMERSGALLERY_PLUGIN_URL; ?>classes/post-images.php",
                 data: {
                     id: postId,
                     function: "title"
@@ -92,11 +93,13 @@
         }
         
         self.fetchImages = function(postId, callback) {
+
+                    console.log("test");
             self.images.removeAll();
             $.ajax({
                 type: "POST",
                 datatype : "json",
-                url: "<?php echo FARMERSGALLERY_PLUGIN_URL; ?>classes/post.images.php",
+                url: "<?php echo FARMERSGALLERY_PLUGIN_URL; ?>classes/post-images.php",
                 data: {
                     id: postId,
                     function: "images"
