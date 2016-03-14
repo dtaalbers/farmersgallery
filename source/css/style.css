@@ -88,6 +88,7 @@
   right: 0;
   overflow: auto;
   display: none;
+  z-index: 9999;
 }
 
 .close-album {
