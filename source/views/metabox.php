@@ -21,7 +21,7 @@ wp_enqueue_media();
 		<div class="col-md-1 image-container">
             <div class="close" data-bind="click: $root.removeImage"><i class="fa fa-close"></i></div>
 			<div class="image">
-				<img class="img-responsive" data-bind="attr:{src: url}">				
+				<div class="thumb" data-bind="style: { backgroundImage: 'url(\'' + url() + '\')' }"></div>				
 			</div>
 		</div>
 	</div>

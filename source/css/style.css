@@ -102,8 +102,14 @@
     cursor: pointer;
 }
 
+.image-container .image .thumb {
+    background-size: cover;
+    height: 80px;
+    background-position: center;
+}
+
 html,body{height:100%}
-#fullscreen {margin:0; padding:0; background:#333 url('../images/sw_page_bg.png'); overflow:hidden; font-family:Helvetica, Arial, sans-serif; font-size:16px; z-index: 9999;}
+#fullscreen {margin:0; padding:0; background:#333 url('../images/sw_page_bg.png'); overflow:hidden; font-family:Helvetica, Arial, sans-serif; font-size:16px;}
 /* custom fonts */
 @font-face {
 	font-family: 'eurof55-webfont';
@@ -141,7 +147,6 @@ a:hover{color:#fff; text-decoration:none;}
 .s36{font-size:36px;}
 .s24{font-size:24px;}
 #customScrollBox a.thumb_link{position:relative; margin:0 0 1px 1px; display:block; float:left;}
-#customScrollBox img{border:none; width: 137px;  height: 91px;}
 #customScrollBox a.thumb_link .selected{position:absolute; top:0; left:0; width:145px; height:91px; background:url('../images/sw_thumb_selected.png') no-repeat; display:none;}
 #dragger_container{position:relative; width:30px; height:580px; float:left; margin:10px 0 0 0; background:url('../images/sw_dragger_bg.png') repeat-y center;}
 #dragger{position:absolute; width:30px; height:59px; background:url('../images/round_custom_scrollbar_bg.png') no-repeat center center; cursor:pointer;}
@@ -149,6 +154,14 @@ a:hover{color:#fff; text-decoration:none;}
 #nextimage_tip{position:fixed; z-index:1; padding:0 20px; line-height:40px; color:#fff; height:40px; top:50%; margin-top:-20px; right:20px; background:url('../images/sw_transparent_black_bg.png'); -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; display:none; font-family:graublauweb-webfont, Helvetica, Arial, sans-serif;}
 .with_border{border:1px solid #000;}
 .with_shadow{-moz-box-shadow:0 0 40px #000; -webkit-box-shadow:0 0 40px #000; box-shadow:0 0 40px #000;}
+
+
+
+#customScrollBox a.thumb_link .thumb {
+    background-size: cover;
+    background-position: center;
+    border:none; width: 137px;  height: 91px;
+}
 
 ::-webkit-scrollbar {
     width: 12px;

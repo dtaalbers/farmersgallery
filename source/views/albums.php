@@ -64,8 +64,7 @@
         self.openAlbum = function(data, event) {           
             var id = $(event.currentTarget).data('id');
             var title = $(event.currentTarget).data('title');  
-            self.fetchTitleAndDescription(id, function(data) {
-
+            self.fetchTitleAndDescription(id, function(data) {             
                 $("#outer_container .title").html(data.title);
                 $("#outer_container .description").html(data.description);                 
                 self.fetchImages(id, function(){   
@@ -93,8 +92,6 @@
         }
         
         self.fetchImages = function(postId, callback) {
-
-                    console.log("test");
             self.images.removeAll();
             $.ajax({
                 type: "POST",
@@ -179,7 +176,7 @@
                     <!-- ko foreach: images --> 
                     <a data-bind="attr:{ href: url}, click: $root.open" class="thumb_link" >
                         <span class="selected"></span>
-                        <img  class="thumb" data-bind="attr:{src: url}" />
+                        <div class="thumb" data-bind="style: { backgroundImage: 'url(\'' + url() + '\')' }"></div>
                     </a>
                     <!-- /ko -->
                     <p class="clear"></p>                   
